@@ -10,6 +10,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDTO } from './dto/create-car.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -28,15 +29,15 @@ export class CarsController {
   // Utilización del pipe, ParseIntPipe (convertir el parámetro a int)
   // new ParseUUIDPipe({ options }); // Elegir versión de uuid
   getCarById(@Param('id', ParseUUIDPipe) id: string) {
-    // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
+    // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre.
     console.log({ id });
     return this.carsService.findOneById(id);
   }
 
   @Post()
-  createCar(@Body() body: any) {
+  createCar(@Body() createCar: CreateCarDTO) {
     return {
-      body,
+      createCar,
     };
   }
 
