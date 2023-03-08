@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CarsService {
-
   private cars = [
     {
       id: 1,
@@ -19,21 +18,18 @@ export class CarsService {
       brand: 'Jeep',
       model: 'Cherokee',
     },
-  ]
+  ];
 
-  
   findAll() {
     return this.cars;
   }
 
-  findOneById( id: number ) {
-
-    const car = this.cars.find(car => car.id === id);
+  findOneById(id: number) {
+    const car = this.cars.find((car) => car.id === id);
 
     // Utilizaciones de excepción de nest
-    if( !car ) throw new NotFoundException(`Car with id '${id}' not found`);
+    if (!car) throw new NotFoundException(`Car with id '${id}' not found`);
 
     return car;
   }
-
 }

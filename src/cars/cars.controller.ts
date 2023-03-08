@@ -1,12 +1,20 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CarsService } from './cars.service';
 
 @Controller('cars')
 export class CarsController {
-
   constructor(
-    private readonly carsService: CarsService // Inyección de dependencias
-  ){}
+    private readonly carsService: CarsService, // Inyección de dependencias
+  ) {}
 
   // Petición get
   @Get()
@@ -17,36 +25,32 @@ export class CarsController {
   // Obtener paŕametro
   @Get(':id') // Segmento dinámico
   // Utilización del pipe, ParseIntPipe (convertir el parámetro a int)
-  getCarById( @Param('id', ParseIntPipe) id: number ) { // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
+  getCarById(@Param('id', ParseIntPipe) id: number) {
+    // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
     console.log({ id });
-    return this.carsService.findOneById( id );
+    return this.carsService.findOneById(id);
   }
 
-
   @Post()
-  createCar( @Body() body: any ) {
+  createCar(@Body() body: any) {
     return {
-      body
-    }
+      body,
+    };
   }
 
   @Patch(':id')
-  updateCar(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() body: any
-  ) {
+  updateCar(@Param('id', ParseIntPipe) id: number, @Body() body: any) {
     return {
       id,
-      body
-    }
+      body,
+    };
   }
 
   @Delete(':id')
-  deleteCar( @Param('id', ParseIntPipe) id: number ) {
+  deleteCar(@Param('id', ParseIntPipe) id: number) {
     return {
       method: 'delete',
-      id
-    }
+      id,
+    };
   }
-
 }
