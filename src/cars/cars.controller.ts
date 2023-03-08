@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { CarsService } from './cars.service';
 
 @Controller('cars')
@@ -16,15 +16,10 @@ export class CarsController {
 
   // Obtener paŕametro
   @Get(':id') // Segmento dinámico
-  getCarById( @Param('id') id: string ) { // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
-    const car = this.carsService.findOneById( Number(id) );
-    if( car ) {
-      console.log({ id });
-      return { car };
-    }
-    return {
-      'Error': `Car with id '${id}' not found`
-    }
+  // Utilización del pipe, ParseIntPipe (convertir el parámetro a int)
+  getCarById( @Param('id', ParseIntPipe) id: number ) { // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
+    console.log({ id });
+    return this.carsService.findOneById( id );
   }
 
 }
