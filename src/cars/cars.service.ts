@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
+import { CreateCarDTO } from './dto/create-car.dto';
 import { Car } from './interfaces/car.interface';
 
 @Injectable()
@@ -31,6 +32,17 @@ export class CarsService {
 
     // Utilizaciones de excepción de nest
     if (!car) throw new NotFoundException(`Car with id '${id}' not found`);
+
+    return car;
+  }
+
+  create(createCarDto: CreateCarDTO): Car {
+    const car: Car = {
+      id: uuid(),
+      ...createCarDto,
+    };
+
+    this.cars = [...this.cars, car];
 
     return car;
   }

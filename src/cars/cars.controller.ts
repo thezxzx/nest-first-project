@@ -37,10 +37,8 @@ export class CarsController {
 
   @Post()
   // @UsePipes(ValidationPipe) // Pipe que va a utilizar el endpoint
-  createCar(@Body() createCar: CreateCarDTO) {
-    return {
-      createCar,
-    };
+  createCar(@Body() createCarDto: CreateCarDTO) {
+    return this.carsService.create(createCarDto);
   }
 
   @Patch(':id')
