@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -25,7 +26,8 @@ export class CarsController {
   // Obtener paŕametro
   @Get(':id') // Segmento dinámico
   // Utilización del pipe, ParseIntPipe (convertir el parámetro a int)
-  getCarById(@Param('id') id: string) {
+  // new ParseUUIDPipe({ options }); // Elegir versión de uuid
+  getCarById(@Param('id', ParseUUIDPipe) id: string) {
     // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
     console.log({ id });
     return this.carsService.findOneById(id);
