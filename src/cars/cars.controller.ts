@@ -13,6 +13,7 @@ import { CarsService } from './cars.service';
 import { CreateCarDTO } from './dto/create-car.dto';
 
 @Controller('cars')
+// @UsePipes(ValidationPipe) // Que todo el controlador use este pipe
 export class CarsController {
   constructor(
     private readonly carsService: CarsService, // Inyección de dependencias
@@ -35,6 +36,7 @@ export class CarsController {
   }
 
   @Post()
+  // @UsePipes(ValidationPipe) // Pipe que va a utilizar el endpoint
   createCar(@Body() createCar: CreateCarDTO) {
     return {
       createCar,
