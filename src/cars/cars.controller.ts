@@ -25,7 +25,7 @@ export class CarsController {
   // Obtener paŕametro
   @Get(':id') // Segmento dinámico
   // Utilización del pipe, ParseIntPipe (convertir el parámetro a int)
-  getCarById(@Param('id', ParseIntPipe) id: number) {
+  getCarById(@Param('id') id: string) {
     // Obtener el segmento, mismo nombre que el segmento, por defecto va a ser string siempre
     console.log({ id });
     return this.carsService.findOneById(id);
